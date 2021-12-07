@@ -28,16 +28,16 @@ class SuperCircle extends StatefulWidget {
     this.speedChangeShadowColorOuter = 2000,
     this.child = const SizedBox(),
   }) :
-      assert(size >= 150 && size <= 700 , 'SuperCircle size OK'),
+      assert(size >= 150 && size <= 700),
       // assert(backgroundCircleColor != null , 'SuperCircle backgroundCircleColor OK'),  //INFO: is always true
-      assert(rotateBegin >= 0.0 && rotateBegin <= 1.0 , 'SuperCircle rotateBegin OK'),
-      assert(rotateEnd >= 0.0 && rotateEnd <= 1.0 , 'SuperCircle rotateEnd OK'),
-      assert(spreadShadowBegin >= 2 , 'SuperCircle spreadShadowBegin OK'),
-      assert(spreadShadowEnd <= 40 , 'SuperCircle spreadShadowEnd OK'),
-      assert(speedChangeColor >= 100 , 'SuperCircle speedChangeColor OK'),
-      assert(speedRotateCircle >= 100 , 'SuperCircle speedRotateCircle OK'),
-      assert(speedChangeShadowColorInner >= 100 , 'SuperCircle speedChangeShadowColorInner OK'),
-      assert(speedChangeShadowColorOuter >= 100 , 'SuperCircle speedChangeShadowColorOuter OK');
+      assert(rotateBegin >= 0.0 && rotateBegin <= 1.0),
+      assert(rotateEnd >= 0.0 && rotateEnd <= 1.0),
+      assert(spreadShadowBegin >= 2),
+      assert(spreadShadowEnd <= 40),
+      assert(speedChangeColor >= 100),
+      assert(speedRotateCircle >= 100),
+      assert(speedChangeShadowColorInner >= 100),
+      assert(speedChangeShadowColorOuter >= 100);
       // assert(child != null , 'SuperCircle child OK');   //INFO: is always true
 
 
