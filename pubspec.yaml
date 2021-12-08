@@ -1,8 +1,6 @@
 name: super_circle
 description: Amazing animated colored circular widget , you can use it to your profile , loading screen or any widget you want.
 version: 1.0.0
-authors:
-  - ABDULKARIM ALBAIK<abdalkarimalbe@gmail.com>
 homepage: https://github.com/ABDULKARIMALBAIK/super_circle.git
 
 environment:
