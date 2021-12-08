@@ -1,6 +1,7 @@
 # [super_circle](https://pub.dev/packages/super_circle/install)
 
 Amazing animated colored circular widget, you can use it in your profile , loading screen or with any widget you want.
+
 Add Super Circle => Better UI/UX
 
 
