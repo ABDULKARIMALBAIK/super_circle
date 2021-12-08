@@ -10,7 +10,13 @@ Add Super Circle => Better UI/UX
 [![repo_size](https://img.shields.io/github/languages/code-size/ABDULKARIMALBAIK/super_circle?color=green&label=repo_size&logo=github&style=flat-square)](https://pub.dev/packages/super_circle/install)
 
 
-## URLS
+
+<div align="center">
+<img src="https://github.com/ABDULKARIMALBAIK/super_circle/raw/main/screenshots/example1.gif" width="30%" height="30%" alt="person"/>
+<img src="https://github.com/ABDULKARIMALBAIK/super_circle/raw/main/screenshots/example2.gif" width="30%" height="30%" alt="loading"/>
+<img src="https://github.com/ABDULKARIMALBAIK/super_circle/raw/main/screenshots/example3.gif" width="30%" height="30%" alt="icon"/>
+</div>
+
 
 
 # Features
@@ -46,7 +52,9 @@ More details see [pub.dev](https://pub.dev/packages/super_circle/install).
 
 The `super_circle` package it is so easy to use:
 
+
 > :warning:: The `size` value must be `size <= MediaQuery.of(context).size.width` to give you good experience.
+
 
 **Without any child widget**
 
@@ -54,7 +62,7 @@ The `super_circle` package it is so easy to use:
       Center(child: SuperCircle());
 ```
 
-**Add image widget**
+**Add Image widget**
 
 ```
       SuperCircle(
@@ -79,23 +87,23 @@ The `super_circle` package it is so easy to use:
         )
 ```
 
-**Add icon widget**
+**Add Icon widget**
 
 ```
-     SuperCircle(
-       size: 400,
-       rotateBegin: 0.0,
-       rotateEnd: 1.0,
-       backgroundCircleColor: Colors.white,
-       speedRotateCircle: 4000,
-       speedChangeShadowColorInner: 3000,
-       speedChangeShadowColorOuter: 3000,
-       child: Container(
-         width: 300,
-         height: 300,
-         child: Icon(Icons.security , color: Colors.red, size: 30,),
-       ),
-     )
+      SuperCircle(
+        size: 250,
+        rotateBegin: 0.0,
+        rotateEnd: 1.0,
+        backgroundCircleColor: Colors.white,
+        speedRotateCircle: 4000,
+        speedChangeShadowColorInner: 3000,
+        speedChangeShadowColorOuter: 3000,
+        child: Container(
+          width: 300,
+          height: 300,
+          child: Icon(Icons.security , color: Colors.red, size: 100,),
+        ),
+      )
 ```
 
 
