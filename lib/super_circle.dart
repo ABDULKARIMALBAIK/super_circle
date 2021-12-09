@@ -9,8 +9,6 @@ library super_circle;
 import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
 
-
-
 /* Main Class */
 
 ///Circular animated colored widget with different shape
@@ -27,80 +25,61 @@ class SuperCircle extends StatefulWidget {
     this.speedChangeShadowColorInner = 2000,
     this.speedChangeShadowColorOuter = 2000,
     this.child = const SizedBox(),
-  }) :
-      assert(size >= 150 && size <= 700),
-      // assert(backgroundCircleColor != null , 'SuperCircle backgroundCircleColor OK'),  //INFO: is always true
-      assert(rotateBegin >= 0.0 && rotateBegin <= 1.0),
-      assert(rotateEnd >= 0.0 && rotateEnd <= 1.0),
-      assert(spreadShadowBegin >= 2),
-      assert(spreadShadowEnd <= 40),
-      assert(speedChangeColor >= 100),
-      assert(speedRotateCircle >= 100),
-      assert(speedChangeShadowColorInner >= 100),
-      assert(speedChangeShadowColorOuter >= 100);
-      // assert(child != null , 'SuperCircle child OK');   //INFO: is always true
-
-
+  })  : assert(size >= 150 && size <= 700),
+        // assert(backgroundCircleColor != null , 'SuperCircle backgroundCircleColor OK'),  //INFO: is always true
+        assert(rotateBegin >= 0.0 && rotateBegin <= 1.0),
+        assert(rotateEnd >= 0.0 && rotateEnd <= 1.0),
+        assert(spreadShadowBegin >= 2),
+        assert(spreadShadowEnd <= 40),
+        assert(speedChangeColor >= 100),
+        assert(speedRotateCircle >= 100),
+        assert(speedChangeShadowColorInner >= 100),
+        assert(speedChangeShadowColorOuter >= 100);
+  // assert(child != null , 'SuperCircle child OK');   //INFO: is always true
 
   /* Variables */
 
   ///[size] size of the circle (width and height are equal).
   final double size;
 
-
   ///[backgroundCircleColor] background color of the circle.
   final Color backgroundCircleColor;
-
 
   ///[rotateBegin] The initial value of the rotation.
   ///The value between 0.0 and 1.0
   final double rotateBegin;
 
-
   ///[rotateEnd] The final value of the rotation.
   ///The value between 0.0 and 1.0
   final double rotateEnd;
 
-
   ///[spreadShadowBegin] The initial value of spread shadow.
   final double spreadShadowBegin;
-
 
   ///[spreadShadowEnd] The final value of spread shadow.
   final double spreadShadowEnd;
 
-
   ///[speedChangeColor] The speed value of changing color of the circle.
   final int speedChangeColor;
-
 
   ///[speedRotateCircle] The speed value of rotation of the circle.
   final int speedRotateCircle;
 
-
   ///[speedChangeShadowColorInner] The speed value of changing color of the inner shadow.
   final int speedChangeShadowColorInner;
-
 
   ///[speedChangeShadowColorOuter] The speed value of changing color of the outer shadow.
   final int speedChangeShadowColorOuter;
 
-
   ///[child] A widget which it is inside the circle.
   final Widget child;
 
-
-
   @override
   State<StatefulWidget> createState() => _SuperCircleState();
-
 }
 
-
-
-
-class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin {
-
+class _SuperCircleState extends State<SuperCircle>
+    with TickerProviderStateMixin {
   /* Animation controllers section */
 
   ///[animationControllerColors] Animation controller to control speed changing color of the circle and shadows.
@@ -115,9 +94,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
   ///[animationControllerShadowInner] Animation controller to control speed changing blurRadius and spreadRadius of the inner shadow.
   late AnimationController animationControllerShadowInner;
 
-
-
-
   /* Animation objects section */
 
   ///[backgroundColor] Animation object to changing color of the circle and shadows.
@@ -128,9 +104,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
 
   ///[spreedShadowInnerColor] Animation object to changing blurRadius and spreadRadius of the inner shadow.
   late Animatable<double> spreedShadowInnerColor;
-
-
-
 
   /* Dispose controllers */
 
@@ -143,9 +116,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
     disposeControllers();
   }
 
-
-
-
   /* Initialize animation controllers and objects */
 
   @override
@@ -157,18 +127,11 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
     initAnimationControllers();
   }
 
-
-
-
   /* Call Variables By widget object */
 
   @override
   // TODO: implement widget
   SuperCircle get widget => super.widget;
-
-
-
-
 
   /* Build Widget tree */
 
@@ -178,65 +141,63 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
       width: widget.size,
       height: widget.size,
       child: Stack(
-        children: [
-
-          _shadowLayer(),
-          _childLayer(),
-          _circleLayer()
-        ],
+        children: [_shadowLayer(), _childLayer(), _circleLayer()],
       ),
     );
   }
 
-
-
-
   /* Methods */
 
   ///Shadow Widget
-  Widget _shadowLayer(){
+  Widget _shadowLayer() {
     return Center(
       child: AnimatedBuilder(
-        animation:  animationControllerShadowInner,
-        builder: (ctx,child){
+        animation: animationControllerShadowInner,
+        builder: (ctx, child) {
           return AnimatedBuilder(
             animation: animationControllerShadowOuter,
-            builder: (ctx,build){
+            builder: (ctx, build) {
               return AnimatedBuilder(
                 animation: animationControllerColors,
-                builder: (ctx,child){
+                builder: (ctx, child) {
                   return Container(
                     width: widget.size - 30,
                     height: widget.size - 30,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-
-                          ///////// * Outer Shadow Color * /////////
-                          BoxShadow(
-                            color: backgroundColor.evaluate(AlwaysStoppedAnimation(animationControllerColors.value))!,
-                            spreadRadius: spreedShadowOuterColor.evaluate(AlwaysStoppedAnimation(animationControllerShadowOuter.value)),
-                            blurRadius: spreedShadowOuterColor.evaluate(AlwaysStoppedAnimation(animationControllerShadowOuter.value)), //12.0,
-                          ),
-
-                        ]
-                    ),
+                    decoration:
+                        BoxDecoration(shape: BoxShape.circle, boxShadow: [
+                      ///////// * Outer Shadow Color * /////////
+                      BoxShadow(
+                        color: backgroundColor.evaluate(AlwaysStoppedAnimation(
+                            animationControllerColors.value))!,
+                        spreadRadius: spreedShadowOuterColor.evaluate(
+                            AlwaysStoppedAnimation(
+                                animationControllerShadowOuter.value)),
+                        blurRadius: spreedShadowOuterColor.evaluate(
+                            AlwaysStoppedAnimation(
+                                animationControllerShadowOuter.value)), //12.0,
+                      ),
+                    ]),
                     child: Container(
                       height: widget.size - 30,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         boxShadow: [
-
                           ///////// * Inner Shadow Color * /////////
                           BoxShadow(
-                            color: backgroundColor.evaluate(AlwaysStoppedAnimation(animationControllerColors.value))!,
+                            color: backgroundColor.evaluate(
+                                AlwaysStoppedAnimation(
+                                    animationControllerColors.value))!,
                           ),
 
                           ///////// * background Color * /////////
                           BoxShadow(
                             color: widget.backgroundCircleColor,
-                            spreadRadius: spreedShadowInnerColor.evaluate(AlwaysStoppedAnimation(animationControllerShadowInner.value)),
-                            blurRadius: spreedShadowOuterColor.evaluate(AlwaysStoppedAnimation(animationControllerShadowOuter.value)),
+                            spreadRadius: spreedShadowInnerColor.evaluate(
+                                AlwaysStoppedAnimation(
+                                    animationControllerShadowInner.value)),
+                            blurRadius: spreedShadowOuterColor.evaluate(
+                                AlwaysStoppedAnimation(
+                                    animationControllerShadowOuter.value)),
                           ),
                         ],
                       ),
@@ -252,12 +213,11 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
   }
 
   ///Child Widget
-  Widget _childLayer(){
-
+  Widget _childLayer() {
     return Center(
       child: Container(
-        width: widget.size * 0.8,   //- 80
-        height: widget.size * 0.8,   //- 80
+        width: widget.size * 0.8, //- 80
+        height: widget.size * 0.8, //- 80
         child: ClipRRect(
           borderRadius: BorderRadius.circular(500),
           child: widget.child,
@@ -267,13 +227,14 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
   }
 
   ///Circle Widget
-  Widget _circleLayer(){
+  Widget _circleLayer() {
     return Center(
       child: RotationTransition(
-        turns: Tween(begin: widget.rotateBegin, end: widget.rotateEnd).animate(animationControllerRotate),
+        turns: Tween(begin: widget.rotateBegin, end: widget.rotateEnd)
+            .animate(animationControllerRotate),
         child: AnimatedBuilder(
           animation: animationControllerColors,
-          builder: (ctx,child){
+          builder: (ctx, child) {
             return WidgetMask(
               blendMode: BlendMode.modulate,
               mask: Image.asset(
@@ -292,7 +253,8 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
                   borderRadius: BorderRadius.circular(500),
                   border: Border.all(
                     width: 30,
-                    color: backgroundColor.evaluate(AlwaysStoppedAnimation(animationControllerColors.value))!,
+                    color: backgroundColor.evaluate(AlwaysStoppedAnimation(
+                        animationControllerColors.value))!,
                   ),
                 ),
               ),
@@ -302,7 +264,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
       ),
     );
   }
-
 
   ///Dispose animation controllers of the widget.
   void disposeControllers() {
@@ -314,7 +275,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
 
   ///initialize animation controllers of the widget.
   void initAnimationControllers() {
-
     animationControllerColors = AnimationController(
       duration: Duration(milliseconds: widget.speedChangeColor),
       vsync: this,
@@ -338,7 +298,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
 
   ///initialize animation objects of the widget.
   void initAnimationObjects() {
-
     backgroundColor = TweenSequence<Color?>([
       TweenSequenceItem(
         weight: 1.0,
@@ -368,8 +327,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
           end: Colors.purpleAccent,
         ),
       ),
-
-
       TweenSequenceItem(
         weight: 1.0,
         tween: ColorTween(
@@ -377,7 +334,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
           end: Colors.yellowAccent,
         ),
       ),
-
       TweenSequenceItem(
         weight: 1.0,
         tween: ColorTween(
@@ -385,9 +341,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
           end: Colors.green,
         ),
       ),
-
-
-
       TweenSequenceItem(
         weight: 1.0,
         tween: ColorTween(
@@ -395,7 +348,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
           end: Colors.red,
         ),
       ),
-
       TweenSequenceItem(
         weight: 1.0,
         tween: ColorTween(
@@ -403,7 +355,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
           end: Colors.deepPurpleAccent,
         ),
       ),
-
       TweenSequenceItem(
         weight: 1.0,
         tween: ColorTween(
@@ -411,7 +362,6 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
           end: Colors.amberAccent,
         ),
       ),
-
       TweenSequenceItem(
         weight: 1.0,
         tween: ColorTween(
@@ -419,50 +369,40 @@ class _SuperCircleState extends State<SuperCircle> with TickerProviderStateMixin
           end: Colors.blueAccent,
         ),
       ),
-
-
     ]);
 
-    spreedShadowOuterColor = TweenSequence<double>(
-        [
-          TweenSequenceItem(
-            weight: 1.0,
-            tween: Tween<double>(
-              begin: widget.spreadShadowBegin,
-              end: widget.spreadShadowEnd,
-            ),
-          ),
+    spreedShadowOuterColor = TweenSequence<double>([
+      TweenSequenceItem(
+        weight: 1.0,
+        tween: Tween<double>(
+          begin: widget.spreadShadowBegin,
+          end: widget.spreadShadowEnd,
+        ),
+      ),
+      TweenSequenceItem(
+        weight: 1.0,
+        tween: Tween<double>(
+          begin: widget.spreadShadowEnd,
+          end: widget.spreadShadowBegin,
+        ),
+      ),
+    ]);
 
-          TweenSequenceItem(
-            weight: 1.0,
-            tween: Tween<double>(
-              begin: widget.spreadShadowEnd,
-              end: widget.spreadShadowBegin,
-            ),
-          ),
-
-        ]);
-
-    spreedShadowInnerColor = TweenSequence<double>(
-        [
-          TweenSequenceItem(
-            weight: 1.0,
-            tween: Tween<double>(
-              begin: widget.spreadShadowBegin,
-              end: - widget.spreadShadowEnd,
-            ),
-          ),
-
-          TweenSequenceItem(
-            weight: 1.0,
-            tween: Tween<double>(
-              begin: - widget.spreadShadowEnd,
-              end: widget.spreadShadowBegin,
-            ),
-          ),
-
-        ]);
+    spreedShadowInnerColor = TweenSequence<double>([
+      TweenSequenceItem(
+        weight: 1.0,
+        tween: Tween<double>(
+          begin: widget.spreadShadowBegin,
+          end: -widget.spreadShadowEnd,
+        ),
+      ),
+      TweenSequenceItem(
+        weight: 1.0,
+        tween: Tween<double>(
+          begin: -widget.spreadShadowEnd,
+          end: widget.spreadShadowBegin,
+        ),
+      ),
+    ]);
   }
-
-
 }
